@@ -1,5 +1,6 @@
 # -
 这是一个使用python Django框架进行后台搭建，数据库使用mysql，前端使用vue框架，使用element UI快速开发的web应用，通过对老人实时监控，分析老人的情感，是否摔倒，人脸检测判断是否有陌生人进入，义工交互，人员录入等功能
+部分后端代码是PHP yii框架开发
 ![image](https://user-images.githubusercontent.com/73871936/191525542-fe92a5be-53b1-48e9-b3e4-367c1bd05ea0.png)
 ![image](https://user-images.githubusercontent.com/73871936/191525747-0e01a1bc-9b6b-478f-b3e3-44a15f47c16a.png)
 ![image](https://user-images.githubusercontent.com/73871936/191525795-063781ca-5ff9-45cb-905f-cbf114f1e53a.png)

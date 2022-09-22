@@ -1,0 +1,79 @@
+<?php
+
+$params = require(__DIR__ . '/params.php');
+
+$config = [
+    'id' => 'basic',
+    'basePath' => dirname(__DIR__),
+    'bootstrap' => ['log'],
+    'language' => 'zh-cn',
+    'components' => [
+        'request' => [
+            'class' => 'app\common\components\ApiRequest',
+            'allowRequestMethods' => ['post', 'get'],
+            'cookieValidationKey' => 'BhHuFbVVAmiu69MaL1pW2El96TWz-U2Y',
+        ],
+        'response' => [
+            'class' => 'app\common\components\ApiResponse',
+            'resCode' => require(__DIR__ . '/response_code.php'),
+        ],
+        'cache' => [
+			'class' => 'yii\caching\ApcCache',
+			'useApcu' => true,
+		],
+        'log' => [
+            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'targets' => [
+                [
+                    'logFile' => '@app/runtime/logs/Mylog/error/error.log',
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['error'],
+                    'maxFileSize' => 1024 * 4,
+                    'maxLogFiles' => 50,
+                ],
+                [
+                    //日志记录方式
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['info'],//日志等级
+                    'logFile' => '@app/runtime/logs/Mylog/info.log',
+                    'logVars' => ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION','_SERVER'], // 加上额外数据
+                    //指定日志策略
+                    'categories' => ['MyLog'],
+                    'maxFileSize' => 1024 * 2,
+                    'maxLogFiles' => 100,
+                ],
+                [
+                    'class' => 'yii\log\EmailTarget',
+                    'levels' => ['error'],
+                    'message' => [
+                        'from' => ['service_dx@bjtu.edu.cn'],
+                        'to' => ['service_dx@bjtu.edu.cn'],
+                        'subject' => '智慧学工严重错误报警',
+                    ],
+                    'except' => [
+                        'yii\web\HeadersAlreadySentException',
+                    ],
+                ],
+            ],
+        ],
+        'excel' => [
+            'class' => 'app\common\components\Excel',
+        ],
+        'word' => [
+            'class' => 'app\common\components\Word',
+        ],
+        'db' => require(__DIR__ . '/db.php'),
+        'redis' => require(__DIR__ . '/redis.php'),
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [],
+        ],
+    ],
+    'modules' => [
+        'foo' => 'app\modules\foo\Foo',
+    ],
+    'params' => $params,
+];
+
+return $config;

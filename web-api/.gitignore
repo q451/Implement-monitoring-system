@@ -1,0 +1,46 @@
+# vim swap files
+*.swp
+nouhp.out
+
+# phpstorm project files
+.idea
+
+# netbeans project files
+nbproject
+
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# windows thumbnail cache
+Thumbs.db
+
+# composer vendor dir
+app/vendor
+app/runtime
+
+# composer itself is not needed
+composer.phar
+
+# Mac DS_Store Files
+.DS_Store
+
+# phpunit itself is not needed
+app/phpunit.phar
+# local phpunit config
+app/phpunit.xml
+
+app/tests
+
+# custom
+api/index.php
+app/config/api_*.php
+app/config/db.php
+app/config/params.php
+app/config/redis.php
+app/config/console.php
+
+# 特定脚本
+getStudent.py
+getClassAndGrade.py

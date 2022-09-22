@@ -1,0 +1,96 @@
+<?php
+
+return [
+    'bootstrap' => ['debug', 'gii'],
+    'modules' => [
+        'debug' => [
+            'class' => 'yii\debug\Module',
+            // uncomment the following to add your IP if you are not connecting from localhost.
+            //'allowedIPs' => ['127.0.0.1', '::1'],
+        ],
+        'gii' => [
+            'class' => 'yii\gii\Module',
+            // uncomment the following to add your IP if you are not connecting from localhost.
+            //'allowedIPs' => ['127.0.0.1', '::1'],
+        ],
+    ],
+    'components' => [
+        'request' => [
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
+        ],
+        'response' => [
+        'accessOrigin' => '*',
+        'accessOriginList' => ['http://121.194.62.88:8082'],
+        'allowHeaders' => 'Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie',
+        'allowCredentials' => 'true',
+        ],
+        'jwt' => [
+            'class'        => 'app\common\components\Jwt',
+            'issuer'       => 'http://dxxycy.bjtu.edu.cn',
+            'audience'     => 'http://dxxycy.bjtu.edu.cn/admin',
+            'jwtId'        => 'lab-jwt',
+            'signature'    => 'lab-signature',
+            'payloadName'  => 'payload',
+            'jwtHeaderKey' => 'token',
+            'expireTime'   => 25920000,
+            'noTokenControllers' => [
+                'site',
+                'foo',
+            ],
+            'noTokenActions' => [
+                'user/account/login',
+                'common/upload/file',
+                'user/manage/export-template',
+                'counseling/tag/export-template',
+                'counseling/question/export-template',
+            ],
+        ],
+        'qiniu' => [
+            'class'         => 'app\common\components\Qiniu',
+            'accessKey'     => '',
+            'secretKey'     => '',
+            'defaultBucket' => '',
+            'privateBucket' => '',
+            'cdnHost'      => [
+                'default' => '',
+                'private' => '',
+            ],
+        ],
+        'ucpaas' => [
+            'class'         => 'app\common\components\Ucpaas',
+            'accountsid'     => 'c0fc74c847e2cd325493b3afb6536b0f',
+            'token'     => '9f73b37554fa1eb729f05dcdf812cff4',
+        ],
+        'mailer' => [            
+            'class' => 'yii\swiftmailer\Mailer',
+            //'viewPath' => '@common/mail',            // send all mails to a file by default. You have to set            
+            // 'useFileTransport' to false and configure a transport            // for the mailer to send real emails.            
+            'useFileTransport' => false,            
+            'transport' => [                
+                //这里如果你是qq的邮箱，可以参考qq客户端设置后再进行配置 http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256                
+                'class' => 'Swift_SmtpTransport',                
+                'host' => 'smtp.qq.com',                
+                // qq邮箱                
+                'username' => '1779813868@qq.com',                
+                //授权码, 什么是授权码， http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256                
+                'password' => 'qkskmkjexpncbcdj',                 
+                'port' => '465',                
+                'encryption' => 'ssl',             
+            ],            
+            'messageConfig'=>[                
+                'charset'=>'UTF-8',                
+                'from'=>['1779813868@qq.com'=>'MAPE 2019']            
+            ],        
+        ],
+        'dompdf' => [
+            'class' => 'app\common\components\Pdf',
+        ],
+        'qiniu' => [
+            'class'         => 'app\common\components\Xunfei',
+            'xunFeiAppId'     => '',
+            'xunFeiSecretKey'     => '',
+        ],
+    ],
+];
